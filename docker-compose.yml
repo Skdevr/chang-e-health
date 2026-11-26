@@ -1,0 +1,71 @@
+services:
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:0.3
+    container_name: change-health-docker-proxy
+    restart: unless-stopped
+    environment:
+      CONTAINERS: "1"
+      EVENTS: "1"
+      INFO: "1"
+      POST: "0"
+      DELETE: "0"
+      AUTH: "0"
+      BUILD: "0"
+      COMMIT: "0"
+      CONFIGS: "0"
+      DISTRIBUTION: "0"
+      EXEC: "0"
+      IMAGES: "0"
+      NETWORKS: "0"
+      NODES: "0"
+      PLUGINS: "0"
+      SECRETS: "0"
+      SERVICES: "0"
+      SESSION: "0"
+      SWARM: "0"
+      SYSTEM: "0"
+      TASKS: "0"
+      VOLUMES: "0"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy_internal
+
+  health:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: change-health
+    restart: unless-stopped
+    mem_limit: 256m
+    read_only: true
+    tmpfs:
+      - /tmp
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "3000"
+      DEMO_MODE: "false"
+      ALLOW_ACTIONS: "false"
+      DOCKER_HOST: tcp://docker-proxy:2375
+      DATA_DIR: /data
+    volumes:
+      - change_health_data:/data
+    depends_on:
+      - docker-proxy
+    networks:
+      - proxy_internal
+      - change_app_net
+
+volumes:
+  change_health_data:
+
+networks:
+  proxy_internal:
+    internal: true
+  change_app_net:
+    external: true

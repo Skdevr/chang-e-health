@@ -1,0 +1,6 @@
+{
+  "name": "Chang’e Health",
+  "description": "Monitor de saúde Docker e disponibilidade em tempo real para chang-e.app com alertas automáticos via E-mail e Telegram e diagnóstico detalhado de logs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

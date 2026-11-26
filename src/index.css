@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-bg-void: #08090B;
+  --color-surface-card: #0D0F14;
+  --color-border-subtle: #20232B;
+  --color-purple-primary: #8057FF;
+  --color-purple-luminous: #A477FF;
+  --color-blue-accent: #5CA8FF;
+  --color-lavender: #A5A4FF;
+  --color-text-primary: #F5F5F7;
+  --color-text-secondary: #AAB2C0;
+  --color-text-muted: #747E91;
+}
+
+@layer base {
+  html {
+    background-color: #08090B;
+    color: #F5F5F7;
+    font-family: var(--font-sans);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: #08090B;
+    color: #F5F5F7;
+    letter-spacing: 0.005em;
+  }
+
+  /* Subtle dark scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #08090B;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #20232B;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #313644;
+  }
+}
+
+.change-gradient-text {
+  background: linear-gradient(125deg, #8057FF 0%, #A5A4FF 52%, #5CA8FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.change-gradient-border {
+  background: linear-gradient(125deg, rgba(128, 87, 255, 0.45), rgba(165, 164, 255, 0.25), rgba(92, 168, 255, 0.45));
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
